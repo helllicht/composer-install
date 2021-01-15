@@ -1,0 +1,18 @@
+name: 'helllicht/composer-install'
+description: 'helllicht internal composer-install-action'
+
+inputs:
+    php-version:
+        description: 'PHP Version [default: "7.4"]'
+        required: true
+        default: "7.4"
+
+runs:
+    using: "composite"
+    steps:
+        -   run: Start helllicht/composer-install
+            shell: bash
+        -   run: ${{ github.action_path }}/composer-install.sh
+            shell: bash
+        -   run: /usr/bin/php${{ inputs.php-version }} composer.phar install --no-dev
+            shell: bash
