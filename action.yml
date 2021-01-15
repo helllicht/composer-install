@@ -10,7 +10,9 @@ inputs:
 runs:
     using: "composite"
     steps:
-        -   run: Start helllicht/composer-install
+        -   run: echo "Start helllicht/composer-install"
+            shell: bash
+        -   run: echo "Choosen PHP Version ${{ inputs.php-version }}"
             shell: bash
         -   run: ${{ github.action_path }}/composer-install.sh
             shell: bash
