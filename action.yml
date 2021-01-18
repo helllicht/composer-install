@@ -3,11 +3,11 @@ description: 'helllicht internal composer-install-action'
 
 inputs:
     php-version:
-        description: 'PHP Version [default: "7.4"]'
+        description: 'PHP Version [default: "7.4"] (options: "7.3", "7.4", "8.0")'
         required: true
         default: "7.4"
     composer-version:
-        description: 'Composer Version [default: "2"]'
+        description: 'Composer Version [default: "2"] (options: "1" or "2")'
         required: true
         default: "2"
 
@@ -16,8 +16,7 @@ runs:
     steps:
         -   run: echo "Start helllicht/composer-install"
             shell: bash
-        -   env:
-              ACTION_COMPOSER_VERSION: ${{ inputs.version }}
-              ACTION_PHP_VERSION: ${{ inputs.php-version }}
-            run: ${{ github.action_path }}/install.sh
+        -   run: |
+                chmod +x "${{ github.action_path }}/install.sh"
+                "${{ github.action_path }}/install.sh -p=${{ inputs.php-version }} -c=${{ inputs.composer-version }}"
             shell: bash
