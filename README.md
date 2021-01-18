@@ -37,9 +37,11 @@ jobs:
               uses: helllicht/composer-install@v1
             - ...
 ```
-Add the variable SFTP_PASS to the repository in github.
--> https://github.com/your_name/the_repository/settings/secrets/actions
-Do not ever commit the password to the repository! It will be visible in the action logs!
+
+## Update composer installation file
+1) Go to: https://github.com/composer/getcomposer.org/commits/master
+2) Get the latest commit sha
+3) replace it in the script
 
 ## Update an active version
 Breaking changes are not allowed when updating an active version!

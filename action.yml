@@ -6,15 +6,18 @@ inputs:
         description: 'PHP Version [default: "7.4"]'
         required: true
         default: "7.4"
+    composer-version:
+        description: 'Composer Version [default: "2"]'
+        required: true
+        default: "2"
 
 runs:
     using: "composite"
     steps:
         -   run: echo "Start helllicht/composer-install"
             shell: bash
-        -   run: echo "Choosen PHP Version ${{ inputs.php-version }}"
-            shell: bash
-        -   run: ${{ github.action_path }}/composer-install.sh
-            shell: bash
-        -   run: /usr/bin/php${{ inputs.php-version }} composer.phar install --no-dev
+        -   env:
+              ACTION_COMPOSER_VERSION: ${{ inputs.version }}
+              ACTION_PHP_VERSION: ${{ inputs.php-version }}
+            run: ${{ github.action_path }}/install.sh
             shell: bash
