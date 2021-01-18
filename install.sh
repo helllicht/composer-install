@@ -43,7 +43,7 @@ wget $URL -O - -q | /usr/bin/php$PHP_VERSION -- --quiet --$COMPOSER_VERSION
 
 # echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-/usr/bin/php$PHP_VERSION install --no-dev
+/usr/bin/php$PHP_VERSION composer.phar install --no-dev
 
 rm composer.phar
 
