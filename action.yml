@@ -17,6 +17,6 @@ runs:
         -   run: echo "Start helllicht/composer-install"
             shell: bash
         -   run: |
-                chmod +x "${{ github.action_path }}/install.sh"
-                "${{ github.action_path }}/install.sh -p=${{ inputs.php-version }} -c=${{ inputs.composer-version }}"
+                chmod +x ${{ github.action_path }}/install.sh
+                bash ${{ github.action_path }}/install.sh -p=${{ inputs.php-version }} -c=${{ inputs.composer-version }}
             shell: bash
