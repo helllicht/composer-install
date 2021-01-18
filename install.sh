@@ -39,6 +39,8 @@ echo "Chosen Composer Version $COMPOSER_VERSION"
 
 wget $URL -O - -q | /usr/bin/php$PHP_VERSION -- --quiet --$COMPOSER_VERSION
 
-mv composer.phar /usr/local/bin/composer
+mv composer.phar $HOME/.local/bin/composer
+
+echo "$HOME/.local/bin" >> $GITHUB_PATH
 
 exit 0
