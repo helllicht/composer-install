@@ -11,6 +11,10 @@ case $i in
     COMPOSER_VERSION="${i#*=}"
     shift # past argument=value
     ;;
+    -d=*|--with-dev=*)
+    WITH_DEV="${i#*=}"
+    shift # past argument=value
+    ;;
     *)
           # unknown option
     ;;
@@ -34,12 +38,20 @@ then
 	exit 1
 fi
 
+WITH_DEV_COMMAND="--no-dev"
+if [ "$WITH_DEV" = "true" ]; then
+  echo "Install composer requirements with dev dependencies!"
+  WITH_DEV_COMMAND=""
+else
+  echo "Install composer requirements with --no-dev"
+fi
+
 echo "Chosen PHP Version $PHP_VERSION"
 echo "Chosen Composer Version $COMPOSER_VERSION"
 
 wget $URL -O - -q | /usr/bin/php$PHP_VERSION -- --quiet --$COMPOSER_VERSION
 
-/usr/bin/php$PHP_VERSION composer.phar install --no-dev
+/usr/bin/php$PHP_VERSION composer.phar install $WITH_DEV_COMMAND
 
 rm composer.phar
 

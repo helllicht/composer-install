@@ -10,6 +10,10 @@ inputs:
         description: 'Composer Version [default: "2"] (options: "1" or "2")'
         required: true
         default: "2"
+    with-dev:
+        description: 'With dev requirements (options: "true" or "false")'
+        required: false
+        default: "false"
 
 runs:
     using: "composite"
@@ -18,5 +22,8 @@ runs:
             shell: bash
         -   run: |
                 chmod +x ${{ github.action_path }}/install.sh
-                bash ${{ github.action_path }}/install.sh -p=${{ inputs.php-version }} -c=${{ inputs.composer-version }}
+                bash ${{ github.action_path }}/install.sh \
+                    -p=${{ inputs.php-version }} \
+                    -c=${{ inputs.composer-version }} \
+                    -d=${{ inputs.with-dev }}
             shell: bash
